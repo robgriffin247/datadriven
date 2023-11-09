@@ -46,20 +46,50 @@ You are now ready to start using R to query the Snowflake!
                     warehouse='ADHOC')
     ```
 
+    This connection is not quick to establish, but you only need to run it once per session. If you want to make sure this only runs if the `conn` object does not exist in the workspace, to speed things up, wrap the above statement in an `if(!exists('conn')){...}`
+
+    ```
+    if(!exists('conn')){
+        conn <- dbConnect(odbc::odbc(), 
+                          'Snowflake', 
+                          uid='KNOWITROB', 
+                          pwd=rstudioapi::askForPassword(),
+                          warehouse='ADHOC')
+    }
+    ```
+
 1. Query the database using the `dbGetQuery()` function. For example, get the DIM_PEOPLE dataset with:
 
     ```
     dim_people <- dbGetQuery(conn, 'select * from CORE.DIM_PEOPLE')
     ```
 
-Run code using:
+1. Run code using:
 
-- *ctrl* + *alt* + *r* to run the whole script
-- *ctrl* + *enter* to run a single or selected lines
-- *ctrl* + *alt* + *b* to run from the start of the script to your current line
-- *ctrl* + *alt* + *e* to run from the current line to the end of the script
+    - *ctrl* + *alt* + *r* to run the whole script
+    - *ctrl* + *enter* to run a single or selected lines
+    - *ctrl* + *alt* + *b* to run from the start of the script to your current line
+    - *ctrl* + *alt* + *e* to run from the current line to the end of the script
 
-You now have the DIM_PEOPLE dataset as an R dataframe. You should be able to see this object in the workspace tab. 
+__You now have the DIM_PEOPLE dataset as an R dataframe__ and should be able to see this object in the workspace tab. Your final code should look like this:
+
+```
+library(rstudioapi)
+library(dbplyr)
+library(DBI)
+library(odbc)
+
+if(!exists('conn')){
+    conn <- dbConnect(odbc::odbc(), 
+                      'Snowflake', 
+                      uid='KNOWITROB', 
+                      pwd=rstudioapi::askForPassword(),
+                      warehouse='ADHOC')
+    }
+
+dim_job_ads <- dbGetQuery(conn, 'select * from CORE.OBT_JOB_ADS')
+```
+
 
 <!--
 
