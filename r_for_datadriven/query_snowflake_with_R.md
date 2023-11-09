@@ -38,13 +38,13 @@ You are now ready to start using R to query the Snowflake!
 
 1. Create a connection to the database. Replace `<USER_NAME>` with your Snowflake username.
 
-```
-conn <- dbConnect(odbc::odbc(), 
-                  'Snowflake', 
-                  uid='<USER_NAME>', 
-                  pwd=rstudioapi::askForPassword(),
-                  warehouse='ADHOC')
-```
+    ```
+    conn <- dbConnect(odbc::odbc(), 
+                    'Snowflake', 
+                    uid='<USER_NAME>', 
+                    pwd=rstudioapi::askForPassword(),
+                    warehouse='ADHOC')
+    ```
 
 1. Query the database using the `dbGetQuery()` function. For example, get the DIM_PEOPLE dataset with:
 
