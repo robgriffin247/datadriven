@@ -48,9 +48,9 @@ You are now ready to start using R to query the Snowflake!
 
 1. Query the database using the `dbGetQuery()` function. For example, get the DIM_PEOPLE dataset with:
 
-```
-dim_people <- dbGetQuery(conn, 'select * from CORE.DIM_PEOPLE')
-```
+    ```
+    dim_people <- dbGetQuery(conn, 'select * from CORE.DIM_PEOPLE')
+    ```
 
 You now have the DIM_PEOPLE dataset as an R dataframe.
 
