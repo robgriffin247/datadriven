@@ -52,7 +52,14 @@ You are now ready to start using R to query the Snowflake!
     dim_people <- dbGetQuery(conn, 'select * from CORE.DIM_PEOPLE')
     ```
 
-You now have the DIM_PEOPLE dataset as an R dataframe.
+Run code using:
+
+- *ctrl* + *alt* + *r* to run the whole script
+- *ctrl* + *enter* to run a single or selected lines
+- *ctrl* + *alt* + *b* to run from the start of the script to your current line
+- *ctrl* + *alt* + *e* to run from the current line to the end of the script
+
+You now have the DIM_PEOPLE dataset as an R dataframe. You should be able to see this object in the workspace tab. 
 
 <!--
 
