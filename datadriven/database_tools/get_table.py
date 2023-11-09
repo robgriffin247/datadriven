@@ -4,7 +4,9 @@ from snowflake import connector
 
 def get_table(schema, table, 
               select=None, where=None, 
-              group_by=None, order_by=None, limit=None):
+              group_by=None, order_by=None, 
+              limit=None, verbose=True):
+    
     query = f"""
     select {'*' if select==None else f'{select}'}
     from DATADRIVEN.{schema}.{table}
@@ -23,5 +25,9 @@ def get_table(schema, table,
         cursor.execute(query)
         df = cursor.fetch_pandas_all()
     
-    print(f'Fetched data from {schema}.{table}!')
+    if verbose:
+        print(f'Fetched data from {schema}.{table}!')
+    else:
+        pass
+
     return df
