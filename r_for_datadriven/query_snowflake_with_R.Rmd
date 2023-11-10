@@ -43,11 +43,13 @@ Open Posit
     library(DBI)
     library(odbc)
     ```
+    
+1. Create a connection to the database. Replace `<DATASOURCE>` and `<USER_NAME>` with the same credentials as used in the OBDC driver.
 
 
     ```{r conn_1, eval=FALSE}
     conn <- dbConnect(odbc::odbc(), 
-                    'Snowflake', 
+                    <DATASOURCE>, 
                     uid='<USER_NAME>', 
                     pwd=rstudioapi::askForPassword(),
                     warehouse='ADHOC')

@@ -53,9 +53,12 @@ Open Posit
     library(odbc)
     ```
 
+4.  Create a connection to the database. Replace `<DATASOURCE>` and
+    `<USER_NAME>` with the same credentials as used in the OBDC driver.
+
     ``` r
     conn <- dbConnect(odbc::odbc(), 
-                    'Snowflake', 
+                    <DATASOURCE>, 
                     uid='<USER_NAME>', 
                     pwd=rstudioapi::askForPassword(),
                     warehouse='ADHOC')
@@ -76,7 +79,7 @@ Open Posit
     }
     ```
 
-4.  Query the database using the `dbGetQuery()` function. For example,
+5.  Query the database using the `dbGetQuery()` function. For example,
     get the DIM_CALENDAR dataset with:
 
     ``` r
@@ -96,7 +99,7 @@ Open Posit
         ## 1460: 2024-12-30           Monday           30
         ## 1461: 2024-12-31          Tuesday           31
 
-5.  Run code using:
+6.  Run code using:
 
     - *ctrl* + *alt* + *r* to run the whole script
     - *ctrl* + *enter* to run a single or selected lines
