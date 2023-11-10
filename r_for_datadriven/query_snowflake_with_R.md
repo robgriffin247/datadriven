@@ -41,7 +41,8 @@ Open Posit
     package.
 
 2.  Create a new script by going to *file* \> *new file* \> *R script*
-    or pressing *ctrl* + *shift* + *n*
+    or pressing *ctrl* + *shift* + *n* — all the code below should be
+    written there rather than the console.
 
 3.  Load the packages into the session with the `library()` function
     (like using `import` in python).

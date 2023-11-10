@@ -33,7 +33,7 @@ Open Posit
 
 1. In the console tab, execute `install.packages(c('rstudioapi', 'dbplyr', 'DBI', 'odbc'))`. This will install packages, like `pip install` does for python. You only need to do this the first time you use a package, or to update the package.
 
-1. Create a new script by going to *file* > *new file* > *R script* or pressing *ctrl* + *shift* + *n*
+1. Create a new script by going to *file* > *new file* > *R script* or pressing *ctrl* + *shift* + *n* &mdash; all the code below should be written there rather than the console.
 
 1. Load the packages into the session with the `library()` function (like using `import` in python).
 
