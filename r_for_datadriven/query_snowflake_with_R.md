@@ -6,9 +6,8 @@ Query Snowflake with R
 
 Just like with Python, we can use R to query the DATADRIVEN database on
 Snowflake. Before getting going with your R script, you will need to
-[install R](https://cran.r-project.org/bin/windows/base/) and [install
-the OBDC driver](!--%20link%20to%20OBDC%20section%20%20--). It is also
-recommended to [install the Posit/RStudio
+[install R](https://cran.r-project.org/bin/windows/base/) and install
+the OBDC driver. It is also recommended to [install the Posit/RStudio
 IDE](https://posit.co/download/rstudio-desktop/) (integrated development
 environment) and use this for developing and executing your R programs —
 if you’re going to use Posit, then **go there first and just download R

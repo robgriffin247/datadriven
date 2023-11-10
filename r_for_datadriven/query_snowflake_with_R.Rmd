@@ -1,0 +1,96 @@
+---
+title: 'Query Snowflake with R'
+output: github_document
+date: "<em style='color:#00508060;'>`r Sys.setlocale('LC_ALL','English'); format(Sys.time(), '%B %d, %Y')`</em>"
+---
+
+<!-- Original date: 2023-11-09 -->
+
+
+Just like with Python, we can use R to query the DATADRIVEN database on Snowflake. Before getting going with your R script, you will need to [install R](https://cran.r-project.org/bin/windows/base/) and install the OBDC driver. It is also recommended to [install the Posit/RStudio IDE](https://posit.co/download/rstudio-desktop/) (integrated development environment) and use this for developing and executing your R programs &mdash; if you're going to use Posit, then __go there first and just download R from there__.
+
+
+
+
+### OBDC Driver
+
+1. [Download](https://developers.snowflake.com/odbc/) and install the ODBC driver.
+
+1. Launch ODBC (Windows > ODBC Data Sources).
+
+1. Check SnowflakeDSIIIDriver is in the Drivers section. If not, reinstall the driver.
+
+1. Add SnowflakeDSIIIDriver in the SystemDSN tab. You will need the _datasource_, _server_ and your Snowflake _username_. I can send you the relevant data source and server values &mdash; just DM me. Also add your password (don't worry, it doesn't save it).
+
+1. Test the connection &mdash; if it succeeds, you're ready to go!
+
+
+
+
+### Querying snowflake
+
+Open Posit
+
+1. In the console tab, execute `install.packages(c('rstudioapi', 'dbplyr', 'DBI', 'odbc'))`. This will install packages, like `pip install` does for python. You only need to do this the first time you use a package, or to update the package.
+
+1. Create a new script by going to *file* > *new file* > *R script* or pressing *ctrl* + *shift* + *n*
+
+1. Load the packages into the session with the `library()` function (like using `import` in python).
+
+    ```{r libraries, eval=FALSE}
+    library(rstudioapi)
+    library(dbplyr)
+    library(DBI)
+    library(odbc)
+    ```
+
+
+    ```{r conn_1, eval=FALSE}
+    conn <- dbConnect(odbc::odbc(), 
+                    'Snowflake', 
+                    uid='<USER_NAME>', 
+                    pwd=rstudioapi::askForPassword(),
+                    warehouse='ADHOC')
+    ```
+
+    This connection is not quick to establish, but you only need to run it once per session. If you want to make sure this only runs if the `conn` object does not exist in the workspace, to speed things up, wrap the above statement in an `if(!exists('conn')){...}`
+
+    ```{r conn_2, eval=FALSE}
+    if(!exists('conn')){
+        conn <- dbConnect(odbc::odbc(), 
+                          'Snowflake', 
+                          uid='KNOWITROB', 
+                          pwd=rstudioapi::askForPassword(),
+                          warehouse='ADHOC')
+    }
+    ```
+
+1. Query the database using the `dbGetQuery()` function. For example, get the DIM_CALENDAR dataset with:
+
+    ```{r dim_dummy, eval=FALSE}
+    dbGetQuery(conn, 'select DATE_DAY, DAY_OF_WEEK_NAME, DAY_OF_MONTH from CORE.DIM_CALENDAR')
+    ```
+    
+    ```{r dim_out, echo=FALSE}
+    library(data.table)
+    fread('hidden/data/dim_calendar_10.csv')[, .(DATE_DAY, DAY_OF_WEEK_NAME, DAY_OF_MONTH)]
+    ```
+
+1. Run code using:
+
+    - *ctrl* + *alt* + *r* to run the whole script
+    - *ctrl* + *enter* to run a single or selected lines
+    - *ctrl* + *alt* + *b* to run from the start of the script to your current line
+    - *ctrl* + *alt* + *e* to run from the current line to the end of the script
+
+___Congratulations!___ You have now queried Snowflake to return the DIM_CALENDAR dataset to the console as an R dataframe. 
+
+Note that your token will expire after four hours of inactivity &mdash; you will get an error similar to the one below. The fix is to restart your R session &mdash; in Posit press *ctrl* + *shift* *F10* or go to *session* > *restart R*. You may also need to clear your workspace which can be done by executing `rm(list=ls())` in the console &mdash; this will clear all objects stored in your workspace.
+
+```
+Error: nanodbc/nanodbc.cpp:1526: 08001: Authentication token has expired. The user must authenticate again.
+```
+
+
+
+<!-- Important source: https://community.snowflake.com/s/article/How-To-Connect-Snowflake-with-R-RStudio-using-RODBC-driver-on-Windows-MacOS-Linux -->
