@@ -109,6 +109,8 @@ Return a data.table sorted by <em>multiple</em> variables:
 
 </details>
 
+------------------------------------------------------------------------
+
 ### To add:
 
 - filter (numeric); extend on sort to get top n
