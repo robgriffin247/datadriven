@@ -1,13 +1,15 @@
 ---
 title: "Data.table"
 output: github_document
-date: ''
+date: "<em style='color:#00508060;'>`r Sys.setlocale('LC_ALL','English'); format(Sys.time(), '%B %d, %Y')`</em>"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, results='hold', collapse=TRUE)
 options(datatable.print.nrows=6, datatable.print.trunc.cols=TRUE)
 ```
+
+- Example data
 
 ```{r}
 library(data.table)
@@ -17,6 +19,7 @@ dt_starwars
 ```
 
 - `DT[i, j, by]` For SQL users: `from[where, select, group by]`
+- Vectors & data types, lists, data frames, data tables
 
 ## Actions on rows: `DT[i]`
 
@@ -53,8 +56,17 @@ A data.table that has been sorted on one or more variables, in ascending or desc
 
 
 
+### To add:
 
-
+- filter (numeric); extend on sort to get top n
+- filter (logical); logical operators
+- select; `dt[, j]`, `.SD`
+- assignment
+- conditional assignment (`dt[, ifelse(...)]` and `dt[i, j]`)
+- compute; `x(j)`
+- group by; `by` and `keyby`
+- special characters; `.SD, .N, .I ...`
+- chaining
 
 <!--
 

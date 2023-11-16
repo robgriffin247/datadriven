@@ -1,5 +1,8 @@
 Data.table
 ================
+<em style='color:#00508060;'>November 16, 2023</em>
+
+- Example data
 
 ``` r
 library(data.table)
@@ -22,6 +25,7 @@ dt_starwars
 ```
 
 - `DT[i, j, by]` For SQL users: `from[where, select, group by]`
+- Vectors & data types, lists, data frames, data tables
 
 ## Actions on rows: `DT[i]`
 
@@ -104,6 +108,19 @@ Return a data.table sorted by <em>multiple</em> variables:
 ```
 
 </details>
+
+### To add:
+
+- filter (numeric); extend on sort to get top n
+- filter (logical); logical operators
+- select; `dt[, j]`, `.SD`
+- assignment
+- conditional assignment (`dt[, ifelse(...)]` and `dt[i, j]`)
+- compute; `x(j)`
+- group by; `by` and `keyby`
+- special characters; `.SD, .N, .I ...`
+- chaining
+
 <!--
 &#10;
 #### Subset
